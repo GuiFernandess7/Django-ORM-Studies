@@ -1,3 +1,5 @@
+![django-orm](https://user-images.githubusercontent.com/63022500/235320076-f0400f8c-1dae-4740-89da-bbcbee89fc43.jpg)
+
 # Django ORM Studies
 Django ORM Studies
 
