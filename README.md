@@ -41,5 +41,6 @@ class MyappConfig(AppConfig):
 ```
 
 To see the result, type ```python manage.py shell``` and the following command:
+
 <img width="211" alt="Captura de tela 2023-04-29 162013" src="https://user-images.githubusercontent.com/63022500/235320576-cadcd986-c6d7-4281-8657-60c3f3d9538a.png">
 
