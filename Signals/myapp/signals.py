@@ -4,4 +4,6 @@ from .models import Product
 
 @receiver(post_save, sender=Product)
 def example_receiver(sender, instance, created, **kwargs):
+    print(instance)
+    print(created)
     print("Intance of Product is saved")
