@@ -44,3 +44,34 @@ To see the result, type ```python manage.py shell``` and the following command:
 
 <img width="211" alt="Captura de tela 2023-04-29 162013" src="https://user-images.githubusercontent.com/63022500/235320576-cadcd986-c6d7-4281-8657-60c3f3d9538a.png">
 
+### Custom Signal
+
+Create a new file called signals.py and type:
+
+```
+from django.dispatch import receiver
+from django.db.models.signals import post_save
+from .models import Product
+
+@receiver(post_save, sender=Product)
+def example_receiver(sender, instance, created, **kwargs):
+    print("Intance of Product is saved")
+```
+
+In the app.py:
+
+```
+from django.apps import AppConfig
+from django.db.models.signals import post_save
+
+def example_receiver(sender, **kwargs):
+    print("Intance is saved")
+
+class MyappConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'myapp'
+
+    def ready(self) -> None:
+        import myapp.signals
+        
+```
