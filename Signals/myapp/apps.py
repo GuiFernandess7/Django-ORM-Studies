@@ -9,4 +9,5 @@ class MyappConfig(AppConfig):
     name = 'myapp'
 
     def ready(self) -> None:
-        post_save.connect(example_receiver)
+        import myapp.signals
+        
