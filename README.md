@@ -75,3 +75,24 @@ class MyappConfig(AppConfig):
         import myapp.signals
         
 ```
+
+To see the parameters of a receiver, type the following in signals.py:
+
+```
+@receiver(post_save, sender=Product)
+def example_receiver(sender, instance, created, **kwargs):
+    print(instance)
+    print(created)
+    print("Intance of Product is saved")
+
+```
+
+and check:
+
+```
+>> from myapp.models import Product
+>> Product(name="test").save()
+Product object (4)
+True
+Intance of Product is saved
+```
