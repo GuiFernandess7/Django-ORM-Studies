@@ -3,7 +3,7 @@ Django ORM Studies
 
 ### Signals
 
-(PT: Sinais permitem que uma mensagem seja exibida após uma mudança ocorrer na tabela do banco de dados)
+(PT: Signals permitem que uma mensagem seja exibida após uma mudança ocorrer na tabela do banco de dados)
 
 Basic app with signals implemented
 
