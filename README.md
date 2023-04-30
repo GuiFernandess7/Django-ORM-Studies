@@ -96,3 +96,66 @@ Product object (4)
 True
 Intance of Product is saved
 ```
+
+### ManyToManyProj
+
+Django project about many to many relationship
+
+models.py:
+
+```
+from django.db import models
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField()
+    is_active = models.BooleanField()
+
+    class Meta:
+        verbose_name_plural = 'Categories'
+    
+    def __str__(self):
+        return self.name
+    
+class Product(models.Model):
+    name = models.CharField(max_length=50)
+    description = models.TextField()
+    slug = models.SlugField()
+    is_active = models.BooleanField()
+    category = models.ManyToManyField(Category, through="Product_Category")
+
+    def __str__(self):
+        return self.name
+
+class Product_Category(models.Model):
+    product_id = models.ForeignKey(Product, on_delete=models.CASCADE)
+    category_id = models.ForeignKey(Category, on_delete=models.CASCADE)
+
+```
+
+The Product_Category class is the intermediate model table between Product and Category
+
+To customize admin forms:
+
+```
+from django.contrib import admin
+from .models import Category, Product, Product_Category
+
+admin.site.register(Product_Category)
+
+class CategoryInline(admin.TabularInline):
+    model = Product.category.through
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {
+        "slug": ("name",)
+    }
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    prepopulated_fields = {
+        "slug": ("name",)
+    }
+    inlines = [CategoryInline]
+```
