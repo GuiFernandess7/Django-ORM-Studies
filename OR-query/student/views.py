@@ -87,10 +87,10 @@ def student_list_(request):
     print(connection.queries)
     return render(request, 'output.html', {'posts':posts})
 
-# Part 6 - Select and Outpuy individual fields
+# Part 6 - Select and Output individual fields
 ######################
 
-def student_list(request):
+def student_list_(request):
 
     posts = Student.objects.filter(classroom=1).only
     ('firstname', 'age')
@@ -98,4 +98,11 @@ def student_list(request):
     print(posts)
     print(connection.queries)
     return render(request, 'output.html', {'data':posts})
+
+# Part 7 - Bypassing ORM using raw method
+######################
+
+def student_list(request):
+
+    posts = Student.objects.all()
 
