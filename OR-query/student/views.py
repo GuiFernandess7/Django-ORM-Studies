@@ -80,9 +80,22 @@ def student_list_(request):
 
 # or
 
-def student_list(request):
+def student_list_(request):
     
     posts = Student.objects.filter(~Q(age__gt=20)&~Q(surname__startswith='baldwin'))
     print(posts)
     print(connection.queries)
     return render(request, 'output.html', {'posts':posts})
+
+# Part 6 - Select and Outpuy individual fields
+######################
+
+def student_list(request):
+
+    posts = Student.objects.filter(classroom=1).only
+    ('firstname', 'age')
+
+    print(posts)
+    print(connection.queries)
+    return render(request, 'output.html', {'data':posts})
+
