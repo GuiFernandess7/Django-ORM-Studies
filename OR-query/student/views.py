@@ -69,11 +69,20 @@ def student_list(request):
 # Part 5 - NOT
 #####################
 
-def student_list(request):
+def student_list_(request):
 
     posts = (Student.objects.exclude(age__gt=20) # greater than 20
     & Student.objects.exclude(firstname__startswith="raquel"))
     
+    print(posts)
+    print(connection.queries)
+    return render(request, 'output.html', {'posts':posts})
+
+# or
+
+def student_list(request):
+    
+    posts = Student.objects.filter(~Q(age__gt=20)&~Q(surname__startswith='baldwin'))
     print(posts)
     print(connection.queries)
     return render(request, 'output.html', {'posts':posts})
