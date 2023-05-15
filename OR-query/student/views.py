@@ -102,7 +102,19 @@ def student_list_(request):
 # Part 7 - Bypassing ORM using raw method
 ######################
 
+def dictfetchall(cursor):
+    desc = cursor.description
+    return [
+        dict(zip([col[0] for col in desc], row))
+        for row in cursor.fetchall()
+    ]
+
 def student_list(request):
 
     posts = Student.objects.all()
+    cursor = connection.cursor()
+    cursor.execute("SELECT * FROM student_student")
+    r = dictfetchall(cursor)
+    print(r)
 
+    return render(request, "output.html", {'data': r})
