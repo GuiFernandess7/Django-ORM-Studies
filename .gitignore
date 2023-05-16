@@ -4,6 +4,7 @@ __pycache__/
 *$py.class
 .vscode
 key.py
+migations
 
 # C extensions
 *.so
