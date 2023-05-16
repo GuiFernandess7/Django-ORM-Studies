@@ -1,6 +1,19 @@
 from django.db import models
 from django.utils import timezone
 
+# Proxy Model
+class BookContent(models.Model):
+    title = models.CharField(max_length=100)
+    created = models.DateTimeField(auto_now_add=True)
+
+class BookOrders(BookContent):
+    class Meta:
+        proxy = True
+        ordering = ['created']
+
+    def created_on(self):
+        return timezone.now() - self.created
+    
 # Multi Table Model
 class Books(models.Model):
     title = models.CharField(max_length=100)
